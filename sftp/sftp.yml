@@ -1,0 +1,14 @@
+version: '3'
+services:
+  sftp:
+    image: atmoz/sftp
+    volumes:
+      - /Users/sora/sftp/ssh_host_rsa_key.pub:/home/foo/.ssh/keys/id_rsa.pub:ro # sync publick key for authorized_keys
+      - /Users/sora/sftp:/home/foo/upload # sync upload directory
+      - etc_ssh:/etc/ssh
+    ports:
+      - "2222:22"
+    command: "foo:password:::upload"
+volumes:
+  etc_ssh:
+    driver: local
